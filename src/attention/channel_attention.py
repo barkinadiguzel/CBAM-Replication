@@ -12,7 +12,6 @@ class ChannelAttention(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        # x: [B, C, H, W]
         B, C, H, W = x.size()
         avg_pool = torch.mean(x, dim=(2,3), keepdim=False)  
         max_pool,_ = torch.max(x, dim=(2,3))                
@@ -20,6 +19,6 @@ class ChannelAttention(nn.Module):
         avg_out = self.mlp(avg_pool)
         max_out = self.mlp(max_pool)
         out = avg_out + max_out
-        out = self.sigmoid(out).unsqueeze(2).unsqueeze(3)  # [B, C, 1, 1]
+        out = self.sigmoid(out).unsqueeze(2).unsqueeze(3)  
 
         return x * out
