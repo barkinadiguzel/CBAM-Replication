@@ -38,7 +38,6 @@ class BasicBlock(nn.Module):
         out = self.conv2(out)
         out = self.norm2(out)
 
-        # CBAM
         out = self.ca(out)
         out = self.sa(out)
 
